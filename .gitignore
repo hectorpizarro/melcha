@@ -1,1 +1,6 @@
 /node_modules
+/mockdata
+/dist
+
+.env*
+yarn-error.log

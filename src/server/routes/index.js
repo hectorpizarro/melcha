@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const path = require("path");
 
 const { handleQuery } = require("./handleQuery");
 const { handleItem } = require("./handleItem");
@@ -11,6 +12,10 @@ router.get("/api/item/:id", async (req, res) => {
 });
 router.get("/api/item/:id/description", async (req, res) => {
   res.send(await handleItemDescription(req));
+});
+
+router.get("*", async (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "..", "..", "/dist/index.html"));
 });
 
 if (module.hot) {

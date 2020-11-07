@@ -1,6 +1,11 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { Provider } from "react-redux";
 
 import store from "./redux/store";
@@ -22,9 +27,10 @@ export default () => {
             <Route path="/items">
               <ContentList />
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <div>contenido por default</div>
             </Route>
+            <Redirect to="/" />
           </Switch>
         </ThemeProvider>
       </Router>

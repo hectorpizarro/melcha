@@ -14,7 +14,7 @@ if (webpackConfig.mode === "production") {
   app.use(express.static(path.join(__dirname, "dist")));
   app.use(routes());
 } else {
-  app.use(middleware(compiler));
+  app.use(middleware(compiler, { writeToDisk: true }));
   app.use(hotMiddleware(compiler));
 
   require("node-hot").configure({
