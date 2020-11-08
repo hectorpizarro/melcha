@@ -59,5 +59,6 @@ async function handleQuery(req) {
 }
 
 module.exports = {
+  handleQueryMocked,
   handleQuery,
 };

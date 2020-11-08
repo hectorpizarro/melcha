@@ -69,5 +69,6 @@ async function handleItem(req) {
 }
 
 module.exports = {
+  handleItemMocked,
   handleItem,
 };

@@ -15,11 +15,10 @@ if (webpackConfig.mode === "production") {
   app.use(routes());
 } else {
   app.use(middleware(compiler, { writeToDisk: true }));
-  // app.use(middleware(compiler));
   app.use(hotMiddleware(compiler));
 
   require("node-hot").configure({
-    exclude: [/[\/\\]node_modules[\/\\]/],
+    exclude: [/[/\\]node_modules[/\\]/],
   });
 
   app.use((req, res, next) => {
