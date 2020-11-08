@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import ProgressiveImage from "react-progressive-graceful-image";
 
 import Breadcrumb from "../shared/Breadcrumb/Breadcrumb";
 import Loader from "../shared/Loader/Loader";

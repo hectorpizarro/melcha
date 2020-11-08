@@ -8,17 +8,20 @@
  *
  * Cualquier route desconocido redirecciona automaticamente a /.
  */
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
-import List from "./components/List/List";
-import Search from "./components/Search/Search";
-import ContentDefault from "./components/ContentDefault/ContentDefault";
-import ListItem from "./components/ListItem/ListItem";
 import { handleFirstLoad } from "./redux/rootReducer";
 import Loader from "./components/shared/Loader/Loader";
+
+const List = React.lazy(() => import("./components/List/List"));
+const Search = React.lazy(() => import("./components/Search/Search"));
+const ContentDefault = React.lazy(() =>
+  import("./components/ContentDefault/ContentDefault")
+);
+const ListItem = React.lazy(() => import("./components/ListItem/ListItem"));
 
 const StyledAppContainer = styled.div`
   height: 100vh;
@@ -40,23 +43,25 @@ export default () => {
   }
 
   return (
-    <StyledAppContainer>
-      {/* Search siempre visible para todos los routes */}
-      <Search />
-      <Switch>
-        <Route path="/items/:id">
-          <ListItem />
-        </Route>
-        <Route path="/items">
-          <List />
-        </Route>
-        <Route exact path="/">
-          {/* Pagina inicial muestra por default component vacio */}
-          <ContentDefault />
-        </Route>
-        {/* Cualquier route desconocido redirecciona a / */}
-        <Redirect to="/" />
-      </Switch>
-    </StyledAppContainer>
+    <Suspense fallback={<Loader />}>
+      <StyledAppContainer>
+        {/* Search siempre visible para todos los routes */}
+        <Search />
+        <Switch>
+          <Route path="/items/:id">
+            <ListItem />
+          </Route>
+          <Route path="/items">
+            <List />
+          </Route>
+          <Route exact path="/">
+            {/* Pagina inicial muestra por default component vacio */}
+            <ContentDefault />
+          </Route>
+          {/* Cualquier route desconocido redirecciona a / */}
+          <Redirect to="/" />
+        </Switch>
+      </StyledAppContainer>
+    </Suspense>
   );
 };
