@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   min-width: 640px;
+  padding-bottom: 32px;
 `;
 
 // Imagen mostrada en cada fila

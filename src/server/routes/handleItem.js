@@ -3,6 +3,7 @@ const axios = require("axios");
 const { validateId } = require("./utils");
 
 const mockData = require("../../../mockdata/item.json");
+const mockDescription = require("../../../mockdata/itemDescription.json");
 const { MAX_ID_LEN, URL_PREFIX_ITEM } = require("../constants.js");
 const { destructureItem } = require("./utils");
 
@@ -18,7 +19,7 @@ async function handleItem(req) {
         name: "John",
         lastname: "Doe",
       },
-      item: destructureItem(mockData, true),
+      item: destructureItem(mockData, true, mockDescription.plain_text),
     };
 
     return { code: 1, message: "OK", data: response };

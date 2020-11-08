@@ -28,6 +28,7 @@ export default () => {
     sold_quantity,
     title,
     price: { currency, amount, free_shipping },
+    description,
   } = selectedItem;
 
   console.log("selectedItem", selectedItem);
@@ -57,6 +58,12 @@ export default () => {
         <div className="gridCell buttonWrap">
           <Styled.Button>Comprar</Styled.Button>
         </div>
+        <div className="gridCell titleDesc">
+          Descripci&oacute;n del producto
+        </div>
+        <div className="gridCell space2" />
+        <div className="gridCell description">{description}</div>
+        <div className="gridCell space3" />
       </Styled.Grid>
     </Styled.Container>
   );

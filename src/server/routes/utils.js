@@ -8,7 +8,7 @@ function getDecimals(num) {
   return arr.length === 2 ? arr[1] : 0;
 }
 
-function destructureItem(rawItem, isDetail) {
+function destructureItem(rawItem, isDetail, description) {
   try {
     const {
       id,
@@ -42,6 +42,7 @@ function destructureItem(rawItem, isDetail) {
     if (isDetail) {
       item.sold_quantity = sold_quantity;
       item.picture = pictures.length > 0 ? pictures[0].url : thumbnail;
+      item.description = description;
     } else {
       item.picture = thumbnail;
     }
