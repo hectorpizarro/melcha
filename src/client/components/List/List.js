@@ -1,11 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { getBreadcrumb, getNumLocale } from "../../shared/utils";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
+import { getBreadcrumb, getNumLocale } from "../../shared/utils";
 import Styled from "./List.style";
 import ImgFreeShipping from "./images/ic_shipping@2x.png.png.png";
+import { selectItem } from "../../redux/rootReducer";
 
 export default () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const {
     root: { list },
   } = useSelector((state) => state);
@@ -13,6 +17,10 @@ export default () => {
   if (!list) {
     return <div>No results</div>;
   }
+
+  const gotoDetail = (id) => {
+    dispatch(selectItem(id, history));
+  };
 
   const len = list.data.items.length;
   const topCats = getBreadcrumb(list.data.categories);
@@ -44,9 +52,9 @@ export default () => {
               }`}
             >
               <Styled.LeftColumn showTopBorder={idx === 0}>
-                <div className="image">
+                <Styled.LinkButton onClick={() => gotoDetail(item.id)}>
                   <Styled.Image src={item.picture} alt="" />
-                </div>
+                </Styled.LinkButton>
                 <Styled.ContentGrid>
                   <div className="currency">{item.price.currency}</div>
                   <div className="amount">
@@ -57,7 +65,11 @@ export default () => {
                       <Styled.IconFreeShip src={ImgFreeShipping} alt="" />
                     )}
                   </div>
-                  <div className="title">{item.title}</div>
+                  <div className="title">
+                    <Styled.LinkButton onClick={() => gotoDetail(item.id)}>
+                      <span>{item.title}</span>
+                    </Styled.LinkButton>
+                  </div>
                 </Styled.ContentGrid>
               </Styled.LeftColumn>
             </div>
@@ -70,9 +82,19 @@ export default () => {
                 {item.city}
               </Styled.RightColumn>
             </div>
+            <div
+              className={`section middleSection ${idx === 0 ? "first" : ""} ${
+                idx === len - 1 ? "last" : ""
+              }`}
+            >
+              <Styled.MiddleColumn showTopBorder={idx === 0} />
+            </div>
           </Styled.RowGrid>
         </div>
       ))}
+      {list.data.items.length === 0 && (
+        <div>No hay resultados en su b&uacute;squeda.</div>
+      )}
     </div>
   );
 };

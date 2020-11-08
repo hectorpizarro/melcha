@@ -8,9 +8,9 @@ import {
 import styled from "styled-components";
 
 import List from "./components/List/List";
-import ContentItem from "./components/ContentItem";
 import Search from "./components/Search/Search";
 import ContentDefault from "./components/ContentDefault/ContentDefault";
+import ListItem from "./components/ListItem/ListItem";
 
 const StyledAppContainer = styled.div`
   height: 100vh;
@@ -23,7 +23,7 @@ export default () => {
         <Search />
         <Switch>
           <Route path="/items/:id">
-            <ContentItem />
+            <ListItem />
           </Route>
           <Route path="/items">
             <List />

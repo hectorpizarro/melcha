@@ -28,7 +28,7 @@ const RowGrid = styled.div`
   display: grid;
   flex-grow: 1;
   grid-template-columns: 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr;
-  grid-template-areas: ". . areaContent areaContent areaContent areaContent areaContent areaContent areaContent areaContent areaContent areaContent areaContent areaContent areaContent areaContent areaContent areaContent areaLocation areaLocation areaLocation . .";
+  grid-template-areas: ". . areaContent areaContent areaContent areaContent areaContent areaContent areaContent areaContent areaContent areaContent areaContent areaContent areaGap areaGap areaGap areaGap areaLocation areaLocation areaLocation . .";
 
   & .section {
     background-color: ${(props) => props.theme.colors.white};
@@ -46,6 +46,18 @@ const RowGrid = styled.div`
     }
     &.last {
       padding: 16px 0px 16px 16px;
+    }
+  }
+
+  & .middleSection {
+    grid-area: areaGap;
+    padding-top: 16px;
+
+    &.first {
+      padding-top: 0px;
+    }
+    &.last {
+      padding-top: 16px;
     }
   }
 
@@ -70,6 +82,24 @@ const LeftColumn = styled.div`
   flex: 1;
   padding-top: 16px;
 `;
+
+const MiddleColumn = styled.div`
+  border-top: ${(props) =>
+    props.showTopBorder ? "0" : `1px solid ${props.theme.colors.graylight}`};
+`;
+
+const LinkButton = styled.button`
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  outline: none;
+`;
+
 const RightColumn = styled.div`
   border-top: ${(props) =>
     props.showTopBorder ? "0" : `1px solid ${props.theme.colors.graylight}`};
@@ -87,23 +117,21 @@ const ContentGrid = styled.div`
     "areaCurrency areaAmount areaFreeShip"
     "areaTitle areaTitle areaTitle";
   font-size: 18px;
-  grid-column-gap: 4px;
+  grid-column-gap: 8px;
   grid-row-gap: 16px;
 
   .currency {
     grid-area: areaCurrency;
     /* background-color: yellow; */
-    align-self: end;
   }
   .amount {
     grid-area: areaAmount;
     /* background-color: red; */
-    align-self: end;
   }
   .free_shipping {
+    padding: 0;
     grid-area: areaFreeShip;
-    /* background-color: blue; */
-    align-self: center;
+    display: flex;
   }
   .title {
     /* background-color: green; */
@@ -113,6 +141,7 @@ const ContentGrid = styled.div`
 
 const IconFreeShip = styled.img`
   height: 16px;
+  align-self: center;
 `;
 
 export default {
@@ -120,6 +149,8 @@ export default {
   Image,
   RowGrid,
   LeftColumn,
+  MiddleColumn,
+  LinkButton,
   RightColumn,
   ContentGrid,
   IconFreeShip,
