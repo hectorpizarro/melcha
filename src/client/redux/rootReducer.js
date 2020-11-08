@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
+  firstLoaded: false,
   searchTerm: "",
   list: null,
-  selectedItem: null,
 };
 
 const rootSlice = createSlice({
@@ -23,11 +23,8 @@ const rootSlice = createSlice({
       } = action;
       state.list = list;
     },
-    setSelectedItem(state, action) {
-      const {
-        payload: { selectedItem },
-      } = action;
-      state.selectedItem = selectedItem;
+    setFirstLoaded(state, action) {
+      state.firstLoaded = true;
     },
   },
 });
@@ -35,11 +32,33 @@ const rootSlice = createSlice({
 // Extract the action creators object and the reducer
 const { actions, reducer } = rootSlice;
 // Extract and export each action creator by name
-export const { setSearchTerm, setList, setSelectedItem } = actions;
+export const { setSearchTerm, setList, setFirstLoaded } = actions;
 // Export the reducer, either as a default or named export
 export default reducer;
 
 // ======
+
+export const handleFirstLoad = (location) => async (dispatch, getState) => {
+  const {
+    root: { firstLoaded },
+  } = getState();
+
+  if (firstLoaded) {
+    return;
+  }
+  const searchParams = new URLSearchParams(location.search);
+  if (location.pathname === "/items") {
+    const searchTerm = searchParams.get("search");
+    if (searchTerm) {
+      await dispatch(setSearchTerm({ searchTerm }));
+      await dispatch(submitSearch());
+    }
+  } else if (/^[a-z0-9]+$/i.test(location.pathname)) {
+    const id = location.pathname.replace("/items/", "");
+    // await dispatch(selectItem(id));
+  }
+  dispatch(setFirstLoaded());
+};
 
 export const submitSearch = () => async (dispatch, getState) => {
   const {
@@ -51,15 +70,4 @@ export const submitSearch = () => async (dispatch, getState) => {
   } catch (error) {
     console.log("error", error);
   }
-};
-
-export const selectItem = (id, history) => (dispatch, getState) => {
-  const {
-    root: { list },
-  } = getState();
-  // TODO este es el happy path, agregar error case
-  const selectedItem = list.data.items.find((item) => item.id === id);
-
-  dispatch(setSelectedItem({ selectedItem }));
-  history.push(`/items/${id}`);
 };

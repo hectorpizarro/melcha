@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { getBreadcrumb, getNumLocale } from "../../shared/utils";
 import Styled from "./List.style";
 import ImgFreeShipping from "./images/ic_shipping@2x.png.png.png";
-import { selectItem } from "../../redux/rootReducer";
+import { setLoading, selectItem } from "../../redux/itemReducer";
 
 export default () => {
   const history = useHistory();
@@ -18,8 +18,10 @@ export default () => {
     return <div>No results</div>;
   }
 
-  const gotoDetail = (id) => {
-    dispatch(selectItem(id, history));
+  const gotoDetail = async (id) => {
+    await dispatch(setLoading({ loading: true }));
+    dispatch(selectItem(id));
+    history.push(`/items/${id}`);
   };
 
   const len = list.data.items.length;

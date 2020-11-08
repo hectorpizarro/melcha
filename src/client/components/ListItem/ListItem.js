@@ -3,12 +3,16 @@ import { useSelector } from "react-redux";
 
 export default () => {
   const {
-    root: { selectedItem },
+    item: { selectedItem, loading },
   } = useSelector((state) => state);
+
+  if (loading) {
+    return <div>loading</div>;
+  }
 
   if (!selectedItem) {
     return <div>No hay item seleccionado.</div>;
   }
-
-  return <div>{JSON.stringify(selectedItem)}</div>;
+  return <div>TEST</div>;
+  // return <div>{JSON.stringify(selectedItem)}</div>;
 };
