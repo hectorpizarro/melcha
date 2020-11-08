@@ -19,6 +19,9 @@ function destructureItem(rawItem, withSoldQuality) {
       currency_id: currency,
       price,
       sold_quantity,
+
+      // Las instrucciones no indicaban este campo, pero lo necesito para mostrar ciudad en el frontend
+      address: { city_name: city },
     } = rawItem;
     const amount = Math.floor(price);
     const item = {
@@ -32,6 +35,7 @@ function destructureItem(rawItem, withSoldQuality) {
       picture,
       condition,
       free_shipping,
+      city,
     };
     if (withSoldQuality) {
       item.sold_quantity = sold_quantity;

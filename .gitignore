@@ -2,5 +2,6 @@
 /mockdata
 /dist
 
+.DS_Store
 .env*
 yarn-error.log

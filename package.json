@@ -81,7 +81,7 @@
     "workbox-webpack-plugin": "4.3.1"
   },
   "scripts": {
-    "start": "node ./src/server/index.js",
+    "start": "rimraf ./dist && node ./src/server/index.js",
     "build": "webpack --config ./src/server/webpack.config.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -101,5 +101,8 @@
       "last 1 safari version"
     ]
   },
-  "main": "./src/server/index.js"
+  "main": "./src/server/index.js",
+  "devDependencies": {
+    "rimraf": "^3.0.2"
+  }
 }
