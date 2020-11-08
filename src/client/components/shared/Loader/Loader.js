@@ -6,9 +6,9 @@ import React from "react";
 
 import Styled from "./Loader.style";
 
-const Loader = () => {
+const Loader = ({ height }) => {
   return (
-    <Styled.Wrap>
+    <Styled.Wrap height={height}>
       <div className="lds-roller">
         <div></div>
         <div></div>

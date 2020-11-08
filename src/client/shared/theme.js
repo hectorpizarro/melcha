@@ -10,5 +10,6 @@ export default {
     graydark: "#666666",
     gray: "#999999",
     graylight: "#eeeeee",
+    blue: "#3483FA",
   },
 };

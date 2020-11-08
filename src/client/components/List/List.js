@@ -7,9 +7,10 @@ import { useHistory } from "react-router-dom";
 
 import { getBreadcrumb, getNumLocale } from "../../shared/utils";
 import Styled from "./List.style";
-import ImgFreeShipping from "./images/ic_shipping@2x.png.png.png";
 import { setLoading, selectItem } from "../../redux/itemReducer";
-import Loader from "../Loader/Loader";
+import Loader from "../shared/Loader/Loader";
+import Breadcrumb from "../shared/Breadcrumb/Breadcrumb";
+import FreeShipping from "../shared/FreeShipping/FreeShipping";
 
 export default () => {
   const history = useHistory();
@@ -41,9 +42,9 @@ export default () => {
   const topCats = getBreadcrumb(list.data.categories);
 
   return (
-    <div>
-      <Styled.Breadcrumb>
-        <div className="breadCrumb">
+    <Styled.Container>
+      <Breadcrumb>
+        <>
           {/* Si el listado esta vacio mostrar mensaje */}
           {list.data.items.length === 0 && (
             <span>No hay resultados en su b&uacute;squeda.</span>
@@ -61,8 +62,8 @@ export default () => {
               </React.Fragment>
             );
           })}
-        </div>
-      </Styled.Breadcrumb>
+        </>
+      </Breadcrumb>
       {list.data.items.map((item, idx) => (
         <div key={item.id}>
           <Styled.RowGrid>
@@ -81,9 +82,7 @@ export default () => {
                     {getNumLocale(item.price.amount)}
                   </div>
                   <div className="free_shipping">
-                    {item.free_shipping && (
-                      <Styled.IconFreeShip src={ImgFreeShipping} alt="" />
-                    )}
+                    <FreeShipping free_shipping={item.free_shipping} />
                   </div>
                   <div className="title">
                     <Styled.LinkButton onClick={() => gotoDetail(item.id)}>
@@ -112,6 +111,6 @@ export default () => {
           </Styled.RowGrid>
         </div>
       ))}
-    </div>
+    </Styled.Container>
   );
 };

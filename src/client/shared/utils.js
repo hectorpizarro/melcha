@@ -23,3 +23,21 @@ export const getBreadcrumb = (categories) => {
  * @returns {String}
  */
 export const getNumLocale = (num) => num.toLocaleString().replaceAll(",", ".");
+
+/**
+ * Traslada el condition en ingles recibido a label en español. Si es desconocido lo vuelve a minusculas y la letra inicial a mayusculas.
+ * @param {String} condition - String con condition en ingles
+ * @returns {String}
+ */
+export const getCondition = (condition) => {
+  switch (condition) {
+    case "new":
+      return "Nuevo";
+    case "used":
+      return "Usado";
+    default:
+      return `${condition.substring(0, 1).toUpperCase()}${condition.substring(
+        1
+      )}`;
+  }
+};

@@ -8,12 +8,13 @@ function getDecimals(num) {
   return arr.length === 2 ? arr[1] : 0;
 }
 
-function destructureItem(rawItem, withSoldQuality) {
+function destructureItem(rawItem, isDetail) {
   try {
     const {
       id,
       title,
-      thumbnail: picture,
+      thumbnail,
+      pictures,
       condition,
       shipping: { free_shipping },
       currency_id: currency,
@@ -34,13 +35,15 @@ function destructureItem(rawItem, withSoldQuality) {
         amount,
         decimals: getDecimals(price),
       },
-      picture,
       condition,
       free_shipping,
       city,
     };
-    if (withSoldQuality) {
+    if (isDetail) {
       item.sold_quantity = sold_quantity;
+      item.picture = pictures.length > 0 ? pictures[0].url : thumbnail;
+    } else {
+      item.picture = thumbnail;
     }
     return item;
   } catch (error) {

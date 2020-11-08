@@ -7,7 +7,7 @@ const Wrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50vh;
+  height: ${({ height }) => (height ? height : "50vh")};
 
   .lds-roller {
     display: inline-block;

@@ -3,25 +3,15 @@
  */
 import styled from "styled-components";
 
+const Container = styled.div`
+  min-width: 640px;
+`;
+
 // Imagen mostrada en cada fila
 const Image = styled.img`
   width: 180px;
   height: 180px;
   border-radius: 4px;
-`;
-
-// Listado de categorias mostrado como breadcrumb
-const Breadcrumb = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr;
-  grid-template-areas: ". . areaText areaText areaText areaText areaText areaText areaText areaText areaText areaText areaText areaText areaText areaText areaText areaText areaText areaText areaText . .";
-
-  .breadCrumb {
-    color: ${(props) => props.theme.colors.gray};
-    font-size: 14px;
-    grid-area: areaText;
-    padding: 16px 0px;
-  }
 `;
 
 // Fila, contiene la seccion izquierda con foto y contenido, seccion media esta vacia para poder respetar el grid pero muestra border top y la seccion derecha muestra la ciudad.
@@ -143,14 +133,8 @@ const ContentGrid = styled.div`
   }
 `;
 
-// Icon para free shipping
-const IconFreeShip = styled.img`
-  height: 16px;
-  align-self: center;
-`;
-
 export default {
-  Breadcrumb,
+  Container,
   Image,
   RowGrid,
   LeftColumn,
@@ -158,5 +142,4 @@ export default {
   LinkButton,
   RightColumn,
   ContentGrid,
-  IconFreeShip,
 };

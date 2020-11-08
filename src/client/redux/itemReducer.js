@@ -64,12 +64,14 @@ export const selectItem = (id) => async (dispatch, getState) => {
   }
   try {
     // enviar API request
-    const { data } = await axios.get(`/api/item/${id}`);
-    if (!data) {
+    const {
+      data: { data: { item } = {} },
+    } = await axios.get(`/api/item/${id}`);
+    if (!item) {
       toast.error("El item seleccionado no existe.");
     } else {
       // Actualizar item seleccionado.
-      await dispatch(setSelectedItem({ selectedItem: data }));
+      await dispatch(setSelectedItem({ selectedItem: item }));
     }
     dispatch(setLoading({ loading: false }));
   } catch (error) {

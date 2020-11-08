@@ -18,7 +18,7 @@ import Search from "./components/Search/Search";
 import ContentDefault from "./components/ContentDefault/ContentDefault";
 import ListItem from "./components/ListItem/ListItem";
 import { handleFirstLoad } from "./redux/rootReducer";
-import Loader from "./components/Loader/Loader";
+import Loader from "./components/shared/Loader/Loader";
 
 const StyledAppContainer = styled.div`
   height: 100vh;

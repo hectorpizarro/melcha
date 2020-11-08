@@ -18,6 +18,8 @@ import store from "./redux/store";
 import theme from "./shared/theme";
 import Router from "./Router";
 
+import "react-toastify/dist/ReactToastify.css";
+
 export default () => {
   return (
     <Provider store={store}>
