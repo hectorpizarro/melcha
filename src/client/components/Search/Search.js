@@ -1,5 +1,5 @@
 /**
- * Search  visible en la parte superior de todas las paginas
+ * Search visible en la parte superior de todas las paginas
  */
 import React from "react";
 
@@ -13,10 +13,7 @@ import ImgSearch from "./images/ic_Search@2x.png.png.png";
 import { INPUT_MAX_LEN } from "../../shared/constants";
 
 export default () => {
-  // Cuando el usuario hace submit se actualiza el search term en url
   const history = useHistory();
-
-  // usa para llamadas async a actions, redux custom async functions
   const dispatch = useDispatch();
 
   // Obtenemos el searchTerm actual desde Redux usando ES6 destructuring
@@ -44,7 +41,7 @@ export default () => {
   };
 
   /**
-   * Ejecutado cuando el usuario presiona una tecla dentro del input, si key es enter hace form submit.
+   * Ejecuta onSubmit cuando el usuario presiona ENTER dentro del input.
    * @param {Object} event - Objeto event
    */
   const onKeyPress = (event) => {

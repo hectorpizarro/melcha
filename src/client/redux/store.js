@@ -1,3 +1,6 @@
+/**
+ * Redux store
+ */
 import { configureStore } from "@reduxjs/toolkit";
 
 import rootReducer from "./rootReducer";

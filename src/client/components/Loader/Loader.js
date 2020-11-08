@@ -1,18 +1,14 @@
+/**
+ * CSS Loader usado en toda la app
+ * Fuente: https://loading.io/css/
+ */
 import React from "react";
-import styled from "styled-components";
 
-import "./Loader.css";
-
-const StyledWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50vh;
-`;
+import Styled from "./Loader.style";
 
 const Loader = () => {
   return (
-    <StyledWrap>
+    <Styled.Wrap>
       <div className="lds-roller">
         <div></div>
         <div></div>
@@ -23,7 +19,7 @@ const Loader = () => {
         <div></div>
         <div></div>
       </div>
-    </StyledWrap>
+    </Styled.Wrap>
   );
 };
 

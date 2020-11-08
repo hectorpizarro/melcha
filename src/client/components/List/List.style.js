@@ -3,13 +3,14 @@
  */
 import styled from "styled-components";
 
+// Imagen mostrada en cada fila
 const Image = styled.img`
   width: 180px;
   height: 180px;
-  /* border: 1px dotted green; */
   border-radius: 4px;
 `;
 
+// Listado de categorias mostrado como breadcrumb
 const Breadcrumb = styled.div`
   display: grid;
   grid-template-columns: 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr 1rem 1fr;
@@ -23,6 +24,7 @@ const Breadcrumb = styled.div`
   }
 `;
 
+// Fila, contiene la seccion izquierda con foto y contenido, seccion media esta vacia para poder respetar el grid pero muestra border top y la seccion derecha muestra la ciudad.
 const RowGrid = styled.div`
   color: ${(props) => props.theme.colors.black};
   display: grid;
@@ -75,6 +77,7 @@ const RowGrid = styled.div`
   }
 `;
 
+// contenido de la seccion izquierda
 const LeftColumn = styled.div`
   border-top: ${(props) =>
     props.showTopBorder ? "0" : `1px solid ${props.theme.colors.graylight}`};
@@ -83,11 +86,13 @@ const LeftColumn = styled.div`
   padding-top: 16px;
 `;
 
+// contenido de la seccion central
 const MiddleColumn = styled.div`
   border-top: ${(props) =>
     props.showTopBorder ? "0" : `1px solid ${props.theme.colors.graylight}`};
 `;
 
+// boton usado como wrap de la foto y titulo
 const LinkButton = styled.button`
   background-color: transparent;
   border: 0;
@@ -100,6 +105,7 @@ const LinkButton = styled.button`
   outline: none;
 `;
 
+// contenido de la seccion derecha
 const RightColumn = styled.div`
   border-top: ${(props) =>
     props.showTopBorder ? "0" : `1px solid ${props.theme.colors.graylight}`};
@@ -108,6 +114,7 @@ const RightColumn = styled.div`
   padding-top: 32px;
 `;
 
+// Grid para los textos a la dewrecha de la foto: currency, amount, icono para free shipping y title.
 const ContentGrid = styled.div`
   display: grid;
   padding: 16px;
@@ -122,11 +129,9 @@ const ContentGrid = styled.div`
 
   .currency {
     grid-area: areaCurrency;
-    /* background-color: yellow; */
   }
   .amount {
     grid-area: areaAmount;
-    /* background-color: red; */
   }
   .free_shipping {
     padding: 0;
@@ -134,11 +139,11 @@ const ContentGrid = styled.div`
     display: flex;
   }
   .title {
-    /* background-color: green; */
     grid-area: areaTitle;
   }
 `;
 
+// Icon para free shipping
 const IconFreeShip = styled.img`
   height: 16px;
   align-self: center;

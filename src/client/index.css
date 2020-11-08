@@ -1,8 +1,11 @@
+/* El body tiene height 100% para poder diagramar los componentes usasndo flex */
 html, body {
   height: 100%;
   background-color: #eeeeee;
 }
 
+/* Copie los fonts que usa la pagina de ML.
+No agregue webfonts para no hacer mas pesada la pagina en este test */
 body {
   padding: 0;
   margin: 0;

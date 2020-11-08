@@ -1,3 +1,6 @@
+/**
+ * Muestra listado de items cuando usuario hace busqueda.
+ */
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -6,41 +9,56 @@ import { getBreadcrumb, getNumLocale } from "../../shared/utils";
 import Styled from "./List.style";
 import ImgFreeShipping from "./images/ic_shipping@2x.png.png.png";
 import { setLoading, selectItem } from "../../redux/itemReducer";
+import Loader from "../Loader/Loader";
 
 export default () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  // Carga list para el render, loading es flag para mostrar loader.
   const {
-    root: { list },
+    root: { list, loading },
   } = useSelector((state) => state);
 
-  if (!list) {
-    return <div></div>;
+  if (loading) {
+    // flag indica que listado aun no esta procesado, mostrar loader
+    return <Loader />;
   }
 
+  /**
+   * Activa el flag para mostrar loader, luego ejectua async selectItem para cargar el item, finalmente redirecciona la app al route de item detail.
+   * @param {String} id - Item id
+   */
   const gotoDetail = async (id) => {
     await dispatch(setLoading({ loading: true }));
     dispatch(selectItem(id));
     history.push(`/items/${id}`);
   };
 
+  // total de items en la lista, usado en la logica para manejar estilos
   const len = list.data.items.length;
+
+  // Array de categorias a mostrar
   const topCats = getBreadcrumb(list.data.categories);
 
   return (
     <div>
       <Styled.Breadcrumb>
         <div className="breadCrumb">
+          {/* Si el listado esta vacio mostrar mensaje */}
+          {list.data.items.length === 0 && (
+            <span>No hay resultados en su b&uacute;squeda.</span>
+          )}
+          {/* Muestra breadcrumb de categorias */}
           {topCats.map((cat, idx) => {
             return (
-              <span key={cat}>
+              <React.Fragment key={cat}>
                 {idx > 0 && " > "}
                 {idx === topCats.length - 1 ? (
                   <strong>{cat}</strong>
                 ) : (
                   <span>{cat}</span>
                 )}
-              </span>
+              </React.Fragment>
             );
           })}
         </div>
@@ -94,9 +112,6 @@ export default () => {
           </Styled.RowGrid>
         </div>
       ))}
-      {/* {list.data.items.length === 0 && (
-        <div>No hay resultados en su b&uacute;squeda.</div>
-      )} */}
     </div>
   );
 };

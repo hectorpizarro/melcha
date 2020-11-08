@@ -1,3 +1,7 @@
+/**
+ * Theme usado en todos los estilos, inyectado por el ThemeProvider de styled components.
+ */
+
 export default {
   colors: {
     white: "#ffffff",
