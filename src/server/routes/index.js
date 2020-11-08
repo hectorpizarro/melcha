@@ -14,7 +14,18 @@ router.get("/api/item/:id/description", async (req, res) => {
   res.send(await handleItemDescription(req));
 });
 
-router.get("*", async (req, res) => {
+router.get("/items/:file", (req, res) => {
+  const {
+    params: { file },
+  } = req;
+  if (/\.(png|js|json)/i.test(file)) {
+    res.sendFile(path.join(__dirname, "..", "..", "..", `/dist/${file}`));
+  } else {
+    res.sendFile(path.join(__dirname, "..", "..", "..", "/dist/index.html"));
+  }
+});
+
+router.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "..", "..", "/dist/index.html"));
 });
 

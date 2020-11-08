@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
 import store from "./redux/store";
-import theme from "./theme";
+import theme from "./shared/theme";
 import Router from "./Router";
 
 export default () => {

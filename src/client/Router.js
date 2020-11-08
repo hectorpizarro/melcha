@@ -8,6 +8,7 @@ import Search from "./components/Search/Search";
 import ContentDefault from "./components/ContentDefault/ContentDefault";
 import ListItem from "./components/ListItem/ListItem";
 import { handleFirstLoad } from "./redux/rootReducer";
+import Loader from "./components/Loader/Loader";
 
 const StyledAppContainer = styled.div`
   height: 100vh;
@@ -25,7 +26,7 @@ export default () => {
   }, [dispatch, location]);
 
   if (!firstLoaded) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
 
   return (

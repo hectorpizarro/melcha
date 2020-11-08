@@ -21,7 +21,9 @@ function destructureItem(rawItem, withSoldQuality) {
       sold_quantity,
 
       // Las instrucciones no indicaban este campo, pero lo necesito para mostrar ciudad en el frontend
-      address: { city_name: city },
+      seller_address: {
+        city: { name: city },
+      },
     } = rawItem;
     const amount = Math.floor(price);
     const item = {

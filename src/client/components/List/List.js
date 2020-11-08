@@ -15,7 +15,7 @@ export default () => {
   } = useSelector((state) => state);
 
   if (!list) {
-    return <div>No results</div>;
+    return <div></div>;
   }
 
   const gotoDetail = async (id) => {
@@ -94,9 +94,9 @@ export default () => {
           </Styled.RowGrid>
         </div>
       ))}
-      {list.data.items.length === 0 && (
+      {/* {list.data.items.length === 0 && (
         <div>No hay resultados en su b&uacute;squeda.</div>
-      )}
+      )} */}
     </div>
   );
 };

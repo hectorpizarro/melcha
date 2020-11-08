@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { selectItem } from "./itemReducer";
 
 const initialState = {
   firstLoaded: false,
@@ -46,6 +47,7 @@ export const handleFirstLoad = (location) => async (dispatch, getState) => {
   if (firstLoaded) {
     return;
   }
+  console.log("location.pathname", location.pathname);
   const searchParams = new URLSearchParams(location.search);
   if (location.pathname === "/items") {
     const searchTerm = searchParams.get("search");
@@ -53,9 +55,10 @@ export const handleFirstLoad = (location) => async (dispatch, getState) => {
       await dispatch(setSearchTerm({ searchTerm }));
       await dispatch(submitSearch());
     }
-  } else if (/^[a-z0-9]+$/i.test(location.pathname)) {
+  } else if (/^\/items\/([a-z0-9]+)$/i.test(location.pathname)) {
+    console.log("DDD");
     const id = location.pathname.replace("/items/", "");
-    // await dispatch(selectItem(id));
+    await dispatch(selectItem(id));
   }
   dispatch(setFirstLoaded());
 };

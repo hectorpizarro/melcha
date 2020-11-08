@@ -46,12 +46,12 @@ export const selectItem = (id) => async (dispatch, getState) => {
     await dispatch(setSelectedItem({ selectedItem }));
     dispatch(setLoading({ loading: false }));
   }
-  // try {
-  //   const { data } = await axios.get(`/api/items/${id}`);
-  //   console.log("API item data", data);
-  //   await dispatch(setSelectedItem({ selectedItem: data }));
-  //   dispatch(setLoading({ loading: false }));
-  // } catch (error) {
-  //   console.log("error", error);
-  // }
+  try {
+    const { data } = await axios.get(`/api/item/${id}`);
+    console.log("API item data", data);
+    await dispatch(setSelectedItem({ selectedItem: data }));
+    dispatch(setLoading({ loading: false }));
+  } catch (error) {
+    console.log("error", error);
+  }
 };
