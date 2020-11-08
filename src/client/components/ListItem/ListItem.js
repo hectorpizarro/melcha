@@ -17,6 +17,7 @@ export default () => {
     return <Loader />;
   }
 
+  // TODO mejorar UI
   if (!selectedItem) {
     return <div>No hay item seleccionado.</div>;
   }
@@ -31,7 +32,6 @@ export default () => {
   } = selectedItem;
 
   console.log("selectedItem", selectedItem);
-  // console.log("picture", picture);
 
   return (
     <Styled.Container>

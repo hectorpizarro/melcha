@@ -75,7 +75,7 @@ export const handleFirstLoad = (location) => async (dispatch, getState) => {
   if (location.pathname === "/items") {
     // Route espera "search" en query string, actualizar y enviar API request
     const searchTerm = searchParams.get("search");
-    if (searchTerm) {
+    if (searchTerm || searchTerm === "") {
       await dispatch(setSearchTerm({ searchTerm }));
       await dispatch(submitSearch());
     }
@@ -96,8 +96,20 @@ export const submitSearch = () => async (dispatch, getState) => {
   } = getState();
   try {
     dispatch(setLoading({ loading: true }));
-    const { data } = await axios.get(`/api/items?q=${searchTerm}`);
-    dispatch(setList({ list: data }));
+    const q = searchTerm.trim();
+    if (!q) {
+      toast.error("Término de búsqueda incorrecto, intente nuevamente.");
+      dispatch(setLoading({ loading: false }));
+    } else {
+      const { data } = await axios.get(`/api/items?q=${q}`);
+
+      if (data.message === "ERROR") {
+        toast.error("Hubo un problema en el sistema, intente nuevamente.");
+        dispatch(setLoading({ loading: false }));
+      } else {
+        dispatch(setList({ list: data }));
+      }
+    }
   } catch (error) {
     toast.error("Hubo un problema cargando listado, intente nuevamente.");
     dispatch(setLoading({ loading: false }));

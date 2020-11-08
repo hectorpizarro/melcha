@@ -65,10 +65,15 @@ export const selectItem = (id) => async (dispatch, getState) => {
   try {
     // enviar API request
     const {
-      data: { data: { item } = {} },
+      data: { data: item, message },
     } = await axios.get(`/api/item/${id}`);
-    if (!item) {
+
+    if (message === "ERROR") {
+      toast.error("Hubo un problema en el sistema, intente nuevamente.");
+      dispatch(setLoading({ loading: false }));
+    } else if (!item) {
       toast.error("El item seleccionado no existe.");
+      dispatch(setLoading({ loading: false }));
     } else {
       // Actualizar item seleccionado.
       await dispatch(setSelectedItem({ selectedItem: item }));

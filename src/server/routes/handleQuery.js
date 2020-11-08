@@ -1,16 +1,14 @@
 const axios = require("axios");
 
-const { URL_PREFIX_QUERY } = require("../constants.js");
+const { URL_PREFIX_QUERY, TOKEN_ID } = require("../constants.js");
+const { destructureItem, getAuthor } = require("./utils");
 
-// TODO agregar author
-const mockData = require("../../../mockdata/items.json");
-const { destructureItem } = require("./utils");
-
-async function handleQuery(req) {
+async function handleQueryMocked(req) {
   const {
     query: { q: myQuery },
   } = req;
   console.log("query", myQuery);
+  const mockData = require("../../../mockdata/items.json");
   try {
     const { results, available_filters } = mockData;
     const catObjects = available_filters.find(
@@ -20,10 +18,7 @@ async function handleQuery(req) {
     const items = results.map((rawItem) => destructureItem(rawItem, false));
 
     const response = {
-      author: {
-        name: "John",
-        lastname: "Doe",
-      },
+      author: getAuthor(req.headers[TOKEN_ID]),
       categories,
       items,
     };
@@ -33,31 +28,34 @@ async function handleQuery(req) {
     console.log("error", error);
     return { code: 2, message: "ERROR", data: {} };
   }
-  // try {
-  //   const {
-  //     data: { results, available_filters },
-  //   } = await axios.get(`${URL_PREFIX_QUERY}${myQuery}&limit=4`);
+}
 
-  //   const catObjects = available_filters.find(
-  //     ({ id }) => id === "category"
-  //   ) || { values: [] };
-  //   const categories = catObjects.values.map(({ name }) => name);
-  //   const items = results.map((rawItem) => destructureItem(rawItem, false));
+async function handleQuery(req) {
+  const {
+    query: { q: myQuery },
+  } = req;
+  try {
+    const {
+      data: { results, available_filters },
+    } = await axios.get(`${URL_PREFIX_QUERY}${encodeURI(myQuery)}&limit=4`);
 
-  //   const data = {
-  //     author: {
-  //       name: "John",
-  //       lastname: "Doe",
-  //     },
-  //     categories,
-  //     items,
-  //   };
+    const catObjects = available_filters.find(
+      ({ id }) => id === "category"
+    ) || { values: [] };
+    const categories = catObjects.values.map(({ name }) => name);
+    const items = results.map((rawItem) => destructureItem(rawItem, false));
 
-  //   return { code: 10, message: "OK", data };
-  // } catch (error) {
-  //   console.log("error", error);
-  //   return { code: 2, message: "ERROR", data: {} };
-  // }
+    const data = {
+      author: getAuthor(req.headers[TOKEN_ID]),
+      categories,
+      items,
+    };
+
+    return { code: 1, message: "OK", data };
+  } catch (error) {
+    console.log("error", error);
+    return { code: 2, message: "ERROR", data: {} };
+  }
 }
 
 module.exports = {

@@ -35,18 +35,21 @@ export default () => {
     history.push(`/items/${id}`);
   };
 
+  // Destructure 'list', si es null configuro defaults para mostrar mensaje indicando no hay items
+  const { data: { items = [], categories = [] } = {} } = list || {};
+
   // total de items en la lista, usado en la logica para manejar estilos
-  const len = list.data.items.length;
+  const len = items.length;
 
   // Array de categorias a mostrar
-  const topCats = getBreadcrumb(list.data.categories);
+  const topCats = getBreadcrumb(categories);
 
   return (
     <Styled.Container>
       <Breadcrumb>
         <>
           {/* Si el listado esta vacio mostrar mensaje */}
-          {list.data.items.length === 0 && (
+          {items.length === 0 && (
             <span>No hay resultados en su b&uacute;squeda.</span>
           )}
           {/* Muestra breadcrumb de categorias */}
@@ -64,8 +67,8 @@ export default () => {
           })}
         </>
       </Breadcrumb>
-      {list.data.items.map((item, idx) => (
-        <div key={item.id}>
+      {items.map(({ id, picture, price, free_shipping, title, city }, idx) => (
+        <div key={id}>
           <Styled.RowGrid>
             <div
               className={`section contentSection ${idx === 0 ? "first" : ""} ${
@@ -73,20 +76,18 @@ export default () => {
               }`}
             >
               <Styled.LeftColumn showTopBorder={idx === 0}>
-                <Styled.LinkButton onClick={() => gotoDetail(item.id)}>
-                  <Styled.Image src={item.picture} alt="" />
+                <Styled.LinkButton onClick={() => gotoDetail(id)}>
+                  <Styled.Image src={picture} alt="" />
                 </Styled.LinkButton>
                 <Styled.ContentGrid>
-                  <div className="currency">{item.price.currency}</div>
-                  <div className="amount">
-                    {getNumLocale(item.price.amount)}
-                  </div>
+                  <div className="currency">{price.currency}</div>
+                  <div className="amount">{getNumLocale(price.amount)}</div>
                   <div className="free_shipping">
-                    <FreeShipping free_shipping={item.free_shipping} />
+                    <FreeShipping free_shipping={free_shipping} />
                   </div>
                   <div className="title">
-                    <Styled.LinkButton onClick={() => gotoDetail(item.id)}>
-                      <span>{item.title}</span>
+                    <Styled.LinkButton onClick={() => gotoDetail(id)}>
+                      <span>{title}</span>
                     </Styled.LinkButton>
                   </div>
                 </Styled.ContentGrid>
@@ -98,7 +99,7 @@ export default () => {
               }`}
             >
               <Styled.RightColumn showTopBorder={idx === 0}>
-                {item.city}
+                {city}
               </Styled.RightColumn>
             </div>
             <div

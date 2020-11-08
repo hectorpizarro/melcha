@@ -60,8 +60,16 @@ function validateId(id) {
   return true;
 }
 
+function getAuthor(token) {
+  return {
+    name: "Hector",
+    lastname: "Pizarro",
+  };
+}
+
 module.exports = {
-  destructureItem,
   getDecimals,
+  destructureItem,
   validateId,
+  getAuthor,
 };

@@ -13,12 +13,17 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { ToastContainer } from "react-toastify";
+import axios from "axios";
 
 import store from "./redux/store";
 import theme from "./shared/theme";
 import Router from "./Router";
 
 import "react-toastify/dist/ReactToastify.css";
+import { AUTH_TOKEN } from "./shared/constants";
+
+// Todos los API requests envian el auth token para recibir Author en el response
+axios.defaults.headers.get["x-token"] = AUTH_TOKEN;
 
 export default () => {
   return (

@@ -8,4 +8,7 @@ module.exports = {
   // https://api.mercadolibre.com/items/​123
   // https://api.mercadolibre.com/items/​123​/description
   URL_PREFIX_ITEM: "https://api.mercadolibre.com/items/",
+
+  // Nombre de header usado como auth token para retornar Author data
+  TOKEN_ID: "x-token",
 };
