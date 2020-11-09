@@ -75,7 +75,6 @@ const Grid = styled.div`
 
 const Image = styled.img`
   width: 680px;
-  height: 680px;
 `;
 
 const Button = styled.button`

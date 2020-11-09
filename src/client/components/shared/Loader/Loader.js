@@ -3,6 +3,7 @@
  * Fuente: https://loading.io/css/
  */
 import React from "react";
+import PropTypes from "prop-types";
 
 import Styled from "./Loader.style";
 
@@ -21,6 +22,14 @@ const Loader = ({ height }) => {
       </div>
     </Styled.Wrap>
   );
+};
+
+Loader.propTypes = {
+  height: PropTypes.string,
+};
+
+Loader.defaultProps = {
+  height: "inherit",
 };
 
 export default Loader;

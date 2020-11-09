@@ -13,7 +13,7 @@ router.get("/items/:file", (req, res) => {
   const {
     params: { file },
   } = req;
-  if (/\.(png|js|json)/i.test(file)) {
+  if (/\.(png|js|json|txt)/i.test(file)) {
     res.sendFile(path.join(__dirname, "..", "..", "..", `/dist/${file}`));
   } else {
     res.sendFile(path.join(__dirname, "..", "..", "..", "/dist/index.html"));

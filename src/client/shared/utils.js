@@ -22,7 +22,10 @@ export const getBreadcrumb = (categories) => {
  * @param {Number} num - Numero
  * @returns {String}
  */
-export const getNumLocale = (num) => num.toLocaleString().replaceAll(",", ".");
+export const getNumLocale = (num) => {
+  const str = num.toLocaleString();
+  return str.replace(/,/, ".");
+};
 
 /**
  * Traslada el condition en ingles recibido a label en español. Si es desconocido lo vuelve a minusculas y la letra inicial a mayusculas.

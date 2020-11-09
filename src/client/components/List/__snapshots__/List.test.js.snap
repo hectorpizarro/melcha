@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<List /> Check snapshot 1`] = `
+<div
+  className="sc-fubCfw epvmuM"
+  height="inherit"
+>
+  <div
+    className="lds-roller"
+  >
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
+  </div>
+</div>
+`;
+
+exports[`<List /> Check snapshot with list data 1`] = `
+<div
+  className="sc-bdfBwQ iMePgP"
+>
+  <div
+    className="sc-pFZIQ kMoonX"
+  >
+    <div
+      className="breadCrumb"
+    >
+      <div>
+        <span>
+          cc
+        </span>
+         &gt; 
+        <span>
+          bb
+        </span>
+         &gt; 
+        <strong>
+          aa
+        </strong>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div
+      className="sc-dlfnbm dmdQNq"
+    >
+      <div
+        className="section contentSection first last"
+      >
+        <div
+          className="sc-hKgILt fQVHkt"
+        >
+          <button
+            aria-label="Ver item"
+            className="sc-jSgupP caFwzH"
+            onClick={[Function]}
+          >
+            <img
+              alt=""
+              className="sc-gsTCUz dDhmPB"
+              src="src"
+            />
+          </button>
+          <div
+            className="sc-iBPRYJ cQqOqG"
+          >
+            <div
+              className="currency"
+            >
+              ARS
+            </div>
+            <div
+              className="amount"
+            >
+              1.122
+            </div>
+            <div
+              className="free_shipping"
+            >
+              <img
+                alt=""
+                className="sc-jrAGrp eUEZkx"
+                src="ic_shipping@2x.png.png.png"
+              />
+            </div>
+            <div
+              className="title"
+            >
+              <button
+                aria-label="Ver item"
+                className="sc-jSgupP caFwzH"
+                onClick={[Function]}
+              >
+                <span>
+                  mock-title
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="section locationSection first last"
+      >
+        <div
+          className="sc-gKsewC cQWlqB"
+        >
+          BA
+        </div>
+      </div>
+      <div
+        className="section middleSection first last"
+      >
+        <div
+          className="sc-eCssSg itivUS"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<List /> Check snapshot with no list data 1`] = `
+<div
+  className="sc-bdfBwQ iMePgP"
+>
+  <div
+    className="sc-pFZIQ kMoonX"
+  >
+    <div
+      className="breadCrumb"
+    >
+      <div>
+        <span>
+          No hay resultados en su búsqueda.
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,7 +1,7 @@
 /**
  * Search visible en la parte superior de todas las paginas
  */
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -15,11 +15,16 @@ import { INPUT_MAX_LEN } from "../../shared/constants";
 export default () => {
   const history = useHistory();
   const dispatch = useDispatch();
-
+  const searchInput = useRef(null);
   // Obtenemos el searchTerm actual desde Redux usando ES6 destructuring
   const {
     root: { searchTerm },
   } = useSelector((state) => state);
+
+  // Al cargar el componente focus al input
+  useEffect(() => {
+    searchInput.current.focus();
+  }, []);
 
   /**
    * Se ejecuta cuando una de estas acciones se ejecuta:
@@ -73,8 +78,9 @@ export default () => {
               onKeyPress={onKeyPress}
               placeholder="Nunca dejes de buscar"
               value={searchTerm}
+              ref={searchInput}
             />
-            <Styled.Button onClick={onSubmit}>
+            <Styled.Button aria-label="Buscar" onClick={onSubmit}>
               <Styled.ImgSearch src={ImgSearch} alt="Buscar" />
             </Styled.Button>
           </div>

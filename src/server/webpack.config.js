@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: [
@@ -26,7 +27,7 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
+        test: /\.(png|svg|jpg|gif|txt|json)$/,
         use: ["file-loader"],
       },
     ],
@@ -35,6 +36,9 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: "./src/client/index.html",
+    }),
+    new CopyPlugin({
+      patterns: [{ from: "public", to: "." }],
     }),
   ],
   mode: process.env.NODE_ENV || "development",

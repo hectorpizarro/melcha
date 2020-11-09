@@ -47,7 +47,7 @@ export default () => {
   return (
     <Styled.Container>
       <Breadcrumb>
-        <>
+        <div>
           {/* Si el listado esta vacio mostrar mensaje */}
           {items.length === 0 && (
             <span>No hay resultados en su b&uacute;squeda.</span>
@@ -65,7 +65,7 @@ export default () => {
               </React.Fragment>
             );
           })}
-        </>
+        </div>
       </Breadcrumb>
       {items.map(({ id, picture, price, free_shipping, title, city }, idx) => (
         <div key={id}>
@@ -76,7 +76,10 @@ export default () => {
               }`}
             >
               <Styled.LeftColumn showTopBorder={idx === 0}>
-                <Styled.LinkButton onClick={() => gotoDetail(id)}>
+                <Styled.LinkButton
+                  aria-label="Ver item"
+                  onClick={() => gotoDetail(id)}
+                >
                   <Styled.Image src={picture} alt="" />
                 </Styled.LinkButton>
                 <Styled.ContentGrid>
@@ -86,7 +89,10 @@ export default () => {
                     <FreeShipping free_shipping={free_shipping} />
                   </div>
                   <div className="title">
-                    <Styled.LinkButton onClick={() => gotoDetail(id)}>
+                    <Styled.LinkButton
+                      aria-label="Ver item"
+                      onClick={() => gotoDetail(id)}
+                    >
                       <span>{title}</span>
                     </Styled.LinkButton>
                   </div>
