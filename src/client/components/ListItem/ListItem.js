@@ -31,8 +31,6 @@ export default () => {
     description,
   } = selectedItem;
 
-  console.log("selectedItem", selectedItem);
-
   return (
     <Styled.Container>
       <Breadcrumb>

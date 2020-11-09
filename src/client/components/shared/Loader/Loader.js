@@ -29,7 +29,7 @@ Loader.propTypes = {
 };
 
 Loader.defaultProps = {
-  height: "inherit",
+  height: "",
 };
 
 export default Loader;
